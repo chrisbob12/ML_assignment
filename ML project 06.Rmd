@@ -15,10 +15,24 @@ An initial look at the data reveals that there are 159 variables in addition to 
 
 ```{r, echo=FALSE, message=FALSE}
 library(caret)
-training <- read.csv(".\\ML_project\\pml-training.csv",stringsAsFactors = FALSE,
-                     strip.white = TRUE, na.strings = c("NA",""))
-testing <- read.csv(".\\ML_project\\pml-testing.csv",stringsAsFactors=FALSE,
-                    strip.white = TRUE, na.strings = c("NA",""))
+if(!file.exists(".\\training.RDS")){
+  URL1 <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
+  download.file(URL1, ".\\pml-training.csv")
+  training <- read.csv(".\\pml-training.csv",stringsAsFactors = FALSE,
+                       strip.white = TRUE, na.strings = c("NA",""))
+}else{
+  training <- readRDS(".\\training.RDS")
+
+}
+
+if(!file.exists(".\\testing.RDS")){
+  URL2 <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"
+  download.file(URL2, ".\\pml-testing.csv")
+  testing <- read.csv(".\\pml-testing.csv",stringsAsFactors=FALSE,
+                      strip.white = TRUE, na.strings = c("NA",""))
+}else{
+  testing <- readRDS(".\\testing.RDS")
+}
 ```
 What is the size of the given training and test sets?
 

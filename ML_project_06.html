@@ -78,7 +78,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 str(testing)</code></pre>
 <p>Visual inspection of the str() output reveals a significant number of columns with either no data or a significant number of NAs, and occurrences of “#DIV/0”, which suggests some further tests:</p>
 <pre class="r"><code>sum(complete.cases(training))</code></pre>
-<pre><code>## [1] 406</code></pre>
+<pre><code>## [1] 0</code></pre>
 <p>So only about 2% of rows are complete. We can calculate the proportion of NAs in individual columns with the following code.</p>
 <pre class="r"><code>colMeans(is.na(training))</code></pre>
 <p>Inspection of the output of this code, shows a significant number of columns with an average level of 0.9793089 NAs. Clearly, no meaningful model can be constructed with such sparse data, so we can eliminate these columns. The proportion calculated is used to identify these, and we can deal with blank entries and the “#DIV/0” entries.</p>
